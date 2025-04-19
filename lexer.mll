@@ -58,12 +58,21 @@ rule token = parse
         toks := (lexbuf, res)::!toks;
         res
       }
-
   (* and rule2 = parse *)
   | ['A'-'Z' 'a'-'z' '_' ] ['A'-'Z' 'a'-'z' '0'-'9' '_'] * as idstr
       {
-        try
-          Hashtbl.find keyword_table idstr
-        with Not_found ->
-          TokIdentifier idstr
+        let res =
+          try
+            Hashtbl.find keyword_table idstr
+          with Not_found ->
+            TokIdentifier idstr
+          in
+        toks := (lexbuf, res)::!toks;
+        res
+      }
+  | eof
+      {
+        let res = TokEOF in
+        toks := (lexbuf, res)::!toks;
+        res
       }

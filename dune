@@ -1,15 +1,30 @@
 (ocamllex
   (modules lexer))
 
+(executable
+  (name main)
+  (modules token lexer main)
+  (flags (:standard (-warn-error -32))))
+
+
+
+;; https://dune.readthedocs.io/en/latest/reference/actions/index.html
+;(rule
+; (alias hi)
+; (target main.ml)
+; (deps
+;   lexer.mll
+;   lexer.ml
+;   token.ml)
+; (action
+;   (chdir %{workspace_root}
+;     (run ocamllex -o %{target} %{deps}))))
+
 ;(menhir
 ;  (modules parser)
 ;  (flags -la 2)
 ;)
-
-(executable
-  (name lexer)
-  (flags (:standard (-warn-error -32))))
-
+;
 ;(rule
 ;  (with-stdout-to calc.out
 ;  (with-stdin-from calc.in
