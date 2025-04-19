@@ -1,12 +1,11 @@
 type keyword = KwInt | KwVoid | KwReturn
 
-type identifier = Identifier string
-
 type literal = LitInt of int
 
 type t
   = TokKeyword of keyword
-  | TokIdentifier
+  | TokLit of literal
+  | TokIdentifier of string
   | TokLPar | TokRPar
   | TokLBrace | TokRBrace
   | TokSC

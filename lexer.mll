@@ -10,18 +10,17 @@ let _ =
 }
 
 rule token = parse 
-    [' ' '\t']     { token lexbuf }     (* skip blanks *)
-  | ['0'-'9']+ as lxm { INT(int_of_string lxm) }
-  | '('            { TokLPar }
-  | ')'            { TokRPar }
-  | '{'            { TokLBrace }
-  | '}'            { TokLBrace }
-  | '}'            { TokLBrace }
+    [' ' '\t']        { token lexbuf }     (* skip blanks *)
+  | ['0'-'9']+ as lxm { TokLit (LitInt (int_of_string lxm)) }
+  | '('               { TokLPar }
+  | ')'               { TokRPar }
+  | '{'               { TokLBrace }
+  | '}'               { TokRBrace }
   (* and rule2 = parse *)
-  | ['A'-'Z' 'a'-'z'] ['A'-'Z' 'a'-'z' '0'-'9' '_'] * as id
+  | ['A'-'Z' 'a'-'z' '_' ] ['A'-'Z' 'a'-'z' '0'-'9' '_'] * as idstr
       {
         try
           Hashtbl.find keyword_table idstr
         with Not_found ->
-          Identifier idstr
+          TokIdentifier idstr
       }

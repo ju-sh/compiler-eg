@@ -1,5 +1,3 @@
-open Token
-
 let main () =
   let lexbuf = Lexing.from_channel stdin in
   count lexbuf;
