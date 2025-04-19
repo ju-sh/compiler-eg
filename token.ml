@@ -1,30 +1,35 @@
-type keyword = KwInt | KwVoid | KwReturn
+type literal = Integer of int
 
-type literal = LitInt of int
+type keyword
+  = Int
+  | Void
+  | Return
 
 type t
-  = TokKeyword of keyword
-  | TokLit of literal
-  | TokIdentifier of string
-  | TokLPar | TokRPar
-  | TokLBrace | TokRBrace
-  | TokSC   (* Semi-colon *)
-  | TokWS   (* White space *)
-  | TokEOF  (* White space *)
+  = Keyword of keyword
+  | Literal of literal
+  | Identifier of string
+  | ParenL      (* ( *)
+  | ParenR      (* ) *)
+  | BraceL      (* { *)
+  | BraceR      (* } *)
+  | SemiColon   (* Semi-colon *)
+  | WhiteSpace  (* White space *)
+  | EOF         (* White space *)
 
 let string_of_t tok =
   match tok with
-    TokKeyword kw ->
+    Keyword kw ->
       (match kw with
-        KwInt -> "Int"
-      | KwVoid -> "Void"
-      | KwReturn -> "Return")
-  | TokLit (LitInt n) -> string_of_int n
-  | TokIdentifier s -> s
-  | TokLPar -> "("
-  | TokRPar -> ")"
-  | TokLBrace -> "{" 
-  | TokRBrace -> "}"
-  | TokSC -> "SC"
-  | TokWS -> "WS"
-  | TokEOF -> "EOF"
+        Int -> "Int"
+      | Void -> "Void"
+      | Return -> "Return")
+  | Literal (Integer n) -> string_of_int n
+  | Identifier s -> "ID " ^ s
+  | ParenL -> "ParenL"
+  | ParenR -> "ParenR"
+  | BraceL -> "BraceL" 
+  | BraceR -> "BraceR"
+  | SemiColon -> "SemiColon"
+  | WhiteSpace -> "WhiteSpace"
+  | EOF -> "EOF"

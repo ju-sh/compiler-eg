@@ -2,8 +2,8 @@
   (modules lexer))
 
 (executable
-  (name main)
-  (modules token lexer main)
+  (name lexerdemo)
+  (modules token lexer lexerdemo)
   (flags (:standard (-warn-error -32))))
 
 

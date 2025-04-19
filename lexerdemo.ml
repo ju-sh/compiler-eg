@@ -1,7 +1,7 @@
 let get_tokens lexbuf = 
   let rec go acc =
     match Lexer.lex lexbuf with
-    | Token.TokEOF -> acc
+    | Token.EOF -> acc
     | tok -> go (tok::acc)
   in go [] |> List.rev
 
