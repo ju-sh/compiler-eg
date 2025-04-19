@@ -8,4 +8,5 @@ type t
   | TokIdentifier of string
   | TokLPar | TokRPar
   | TokLBrace | TokRBrace
-  | TokSC
+  | TokSC  (* Semi-colon *)
+  | TokWS  (* White space *)

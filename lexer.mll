@@ -1,6 +1,8 @@
 {
 open Token
 
+let toks = ref []
+
 let keyword_table = Hashtbl.create 53
 let _ =
   List.iter (fun (kwd, tok) -> Hashtbl.add keyword_table kwd tok)
@@ -10,12 +12,53 @@ let _ =
 }
 
 rule token = parse 
-    [' ' '\t']        { token lexbuf }     (* skip blanks *)
-  | ['0'-'9']+ as lxm { TokLit (LitInt (int_of_string lxm)) }
-  | '('               { TokLPar }
-  | ')'               { TokRPar }
-  | '{'               { TokLBrace }
-  | '}'               { TokRBrace }
+    [' ' '\t']
+      {
+        toks := (lexbuf, TokWS)::!toks;
+
+        (* skip blanks *)
+        token lexbuf
+      }     
+
+  | ['0'-'9']+ as lxm
+      {
+        let res = TokLit (LitInt (int_of_string lxm)) in
+        toks := (lexbuf, res)::!toks;
+        res
+      }
+
+  | ';' 
+      {
+        let res = TokSC in
+        toks := (lexbuf, res)::!toks;
+        res
+      }
+
+  | '(' 
+      {
+        let res = TokLPar in
+        toks := (lexbuf, res)::!toks;
+        res
+      }
+  | ')'
+      {
+        let res = TokRPar in
+        toks := (lexbuf, res)::!toks;
+        res
+      }
+  | '{'
+      {
+        let res = TokLBrace in
+        toks := (lexbuf, res)::!toks;
+        res
+      }
+  | '}'
+      {
+        let res = TokRBrace in
+        toks := (lexbuf, res)::!toks;
+        res
+      }
+
   (* and rule2 = parse *)
   | ['A'-'Z' 'a'-'z' '_' ] ['A'-'Z' 'a'-'z' '0'-'9' '_'] * as idstr
       {
