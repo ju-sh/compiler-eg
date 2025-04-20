@@ -1,10 +1,19 @@
 (ocamllex
   (modules lexer))
 
+(menhir
+  (modules parser)
+  (flags -la 2))
+
 (executable
-  (name lexerdemo)
-  (modules token lexer lexerdemo)
+  (name parserdemo)
+  (modules lexer ast parser parserdemo)
   (flags (:standard (-warn-error -32))))
+
+; (executable
+;   (name lexerdemo)
+;   (modules token lexer lexerdemo)
+;   (flags (:standard (-warn-error -32))))
 
 
 
@@ -20,10 +29,6 @@
 ;   (chdir %{workspace_root}
 ;     (run ocamllex -o %{target} %{deps}))))
 
-;(menhir
-;  (modules parser)
-;  (flags -la 2)
-;)
 ;
 ;(rule
 ;  (with-stdout-to calc.out
