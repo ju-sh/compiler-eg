@@ -6,9 +6,14 @@
   (flags -la 2))
 
 (executable
-  (name parserdemo)
-  (modules lexer ast parser parserdemo)
+  (name main)
+  (modules lexer ast parser asm main)
   (flags (:standard (-warn-error -32))))
+
+; (executable
+;   (name parserdemo)
+;   (modules lexer ast parser parserdemo)
+;   (flags (:standard (-warn-error -32))))
 
 ; (executable
 ;   (name lexerdemo)

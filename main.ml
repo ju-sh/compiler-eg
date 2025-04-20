@@ -1,7 +1,6 @@
 let main () =
-  (* let lexbuf = Lexing.from_string "int main() { return 0 }" in *)
   let lexbuf = Lexing.from_channel stdin in
-  let res =
+  let ast =
     try
       Parser.prog Lexer.lex lexbuf
     with
@@ -17,7 +16,11 @@ let main () =
           lexbuf.lex_curr_p.pos_lnum;
         exit 1
   in 
-    let _ = res in
-    Printf.printf "%s\n" (Ast.string_of_prog res)
+    let _ = ast in
+    let asm = Asm.from_ast ast in
+    Printf.printf "%s\n%s\n"
+      (* No need of executable stack *)
+      ".section .note.GNU-stack,\"\",@progbits"
+      (Asm.string_of_asm asm)
 
 let () = main ()
