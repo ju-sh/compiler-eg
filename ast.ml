@@ -31,3 +31,12 @@ let string_of_func = function
 
 let string_of_prog = function
   | Prog f -> "Prog(" ^ string_of_func f ^ ")"
+
+(* (1* Pretty printer *1) *)
+(* let pp *)
+(*   indlvl (1* indentation level *1) *)
+(*   arg =  (1* AST term *1) *)
+(*   match arg with *)
+(*   | Func (ty, ident, stm) -> *)
+
+
