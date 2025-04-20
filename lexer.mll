@@ -9,14 +9,22 @@ let _ =
       "return", Keyword Return ]
 }
 
+let whitespace = [' ' '\t']
+let digit = ['0'-'9']
+let letter = ['A'-'Z' 'a'-'z']
+let non_digit = '_' | letter
+let ident = non_digit (non_digit | digit)*
+
+let line_comment = "//" [^'\n']*
+
 rule lex = parse 
-    [' ' '\t']
+    whitespace 
       {
         (* skip blanks *)
         lex lexbuf
       }     
 
-  | ['0'-'9']+ as lxm
+  | digit+ as lxm
       {
         Literal (Integer (int_of_string lxm))
       }
@@ -27,7 +35,7 @@ rule lex = parse
   | '{'    { BraceL }
   | '}'    { BraceR }
   (* and rule2 = parse *)
-  | ['A'-'Z' 'a'-'z' '_' ] ['A'-'Z' 'a'-'z' '0'-'9' '_'] * as idstr
+  | ident as idstr
       {
         try
           Hashtbl.find keyword_table idstr
