@@ -1,0 +1,9 @@
+** Parser demo
+
+#+begin_src
+$ dune exec ./parserdemo.exe
+int main( void ) {
+  return 0;
+}
+Prog(Func(TyInt, main, Return(0)))
+#+end_src

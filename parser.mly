@@ -12,23 +12,24 @@
 %token EOF
 
 %start prog
+%type <prog> prog
 
 %%
 
 prog:
-  | f = func
+  | f = func EOF
     { Prog f }
 
 func:
-  | "int" id = IDENT "(" "void" ")" "{" s = stmt "}"
+  | INT id = IDENT PARENL VOID PARENR BRACEL s = stmt BRACER
     { Func (TyInt, id,  s) }
 
 stmt:
-  | "return"  e = expr ";"
+  | RETURN e = expr SEMICOLON
     { Return e }
 
 expr:
-  | i = INT
+  | i = INTVAL
     { Literal (Integer i) }
 
 %%

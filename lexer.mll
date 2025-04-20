@@ -1,5 +1,6 @@
 {
 open Parser
+exception Error of char
 
 (* C has 32 keywords *)
 let keyword_table = Hashtbl.create 35
@@ -48,3 +49,7 @@ rule lex = parse
           IDENT(idstr)
       }
   | eof    { EOF }
+  | _ as c
+      {
+          raise (Error c)
+      }
