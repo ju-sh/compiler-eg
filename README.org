@@ -26,3 +26,8 @@ int main (void) {
 }
 MOV IMM32 %EAX
 #+end_src
+* Resources
+https://gitlab.inria.fr/fpottier/menhir/blob/master/demos/calc-inspection/parser.mly
+
+** Challenges
+ - https://stackoverflow.com/questions/68162491/parsing-expressions-unary-binary-and-incrementing-decrementing-operators

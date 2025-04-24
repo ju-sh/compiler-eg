@@ -17,10 +17,14 @@ let main () =
         exit 1
   in 
     let _ = ast in
+    Printf.printf "\n%s\n"
+      (Ast.string_of_prog ast)
+    (*
     let asm = Asm.from_ast ast in
     Printf.printf "%s\n%s\n"
       (* No need of executable stack *)
       ".section .note.GNU-stack,\"\",@progbits"
       (Asm.string_of_asm asm)
+     *)
 
 let () = main ()

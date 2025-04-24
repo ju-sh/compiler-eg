@@ -1,3 +1,4 @@
+(*
 open Ast
 
 type reg
@@ -36,4 +37,4 @@ let string_of_instr = function
 let string_of_asm = function
   | Prog (Func (_, ilist)) ->
       ilist |> List.map string_of_instr |> String.concat "\n"
-    
+    *)

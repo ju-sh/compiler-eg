@@ -2,7 +2,15 @@ type identifier = string
 
 type typ = TyInt
 type literal = Integer of int
-type expr = Literal of literal
+
+type unop
+  = Complement
+  | Negate
+
+type expr
+  = Literal of literal
+  | Unop of unop * expr
+
 type stmt = Return of expr
 type func = Func of typ * identifier * stmt
 type prog = Prog of func
@@ -13,8 +21,13 @@ let string_of_typ = function
 let string_of_literal = function
   | Integer n -> string_of_int n
 
-let string_of_expr = function
+let string_of_unop = function
+  | Complement -> "Complement"
+  | Negate -> "Negate"
+
+let rec string_of_expr = function
   | Literal lit -> string_of_literal lit
+  | Unop (op, e) -> (string_of_unop op) ^ " ("  ^ (string_of_expr e)
 
 let string_of_stmt = function
   | Return e -> "Return(" ^ string_of_expr e ^ ")"
@@ -40,3 +53,14 @@ let string_of_prog = function
 (*   | Func (ty, ident, stm) -> *)
 
 
+(*
+ * AST grammar 
+ *
+prog := func
+func := ident stmt
+stmt := return expr
+expr := Const int
+      | Unop unop expr
+unop := Complement
+      | Negate 
+ *)

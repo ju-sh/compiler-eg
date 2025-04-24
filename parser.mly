@@ -9,7 +9,12 @@
 %token INT VOID
 %token RETURN
 %token SEMICOLON
+%token MINUS
+%token TILDE
+%token UDECR
 %token EOF
+
+%nonassoc UMINUS
 
 %start prog
 %type <prog> prog
@@ -31,5 +36,24 @@ stmt:
 expr:
   | i = INTVAL
     { Literal (Integer i) }
-
+  | PARENL e = expr PARENR
+    { e }
+  | MINUS e = expr %prec UMINUS 
+    { Unop (Negate, e) }
+  | TILDE e = expr
+    { Unop (Complement, e) }
 %%
+
+(*
+ * CST grammar 
+ *
+prog := func
+func := "int" ident "(" "void" ")" "{" stmt "}"
+stmt := "return" expr
+expr := int
+      | unop expr
+      | "(" expr ")"
+unop := "~"
+      | "-"
+ *)
+

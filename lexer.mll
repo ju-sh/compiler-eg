@@ -40,6 +40,9 @@ rule lex = parse
   | ')'    { PARENR }
   | '{'    { BRACEL }
   | '}'    { BRACER }
+  | "--"   { UDECR }
+  | '-'    { MINUS }
+  | '~'    { TILDE }
   (* and rule2 = parse *)
   | ident as idstr
       {
