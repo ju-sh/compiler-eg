@@ -26,6 +26,14 @@ int main (void) {
 }
 MOV IMM32 %EAX
 #+end_src
+
+** With cli
+
+#+begin_src
+$ cat examples/one.eg | dune exec ./egcc.exe
+Prog(Func(TyInt, main, Return(32)))
+#+end_src
+
 * Resources
 https://gitlab.inria.fr/fpottier/menhir/blob/master/demos/calc-inspection/parser.mly
 

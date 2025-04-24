@@ -6,8 +6,8 @@
   (flags -la 2))
 
 (executable
-  (name cli)
-  (modules lexer ast parser tacky stage core cli)
+  (name egcc)
+  (modules lexer ast parser tacky stage core egcc)
   (libraries cmdliner)
   (flags (:standard (-warn-error -32))))
 
