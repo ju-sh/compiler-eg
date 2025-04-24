@@ -1,4 +1,6 @@
-let main () =
+open Stage
+
+let main stage =
   let lexbuf = Lexing.from_channel stdin in
   let ast =
     try
@@ -17,8 +19,11 @@ let main () =
         exit 1
   in 
     let _ = ast in
-    Printf.printf "\n%s\n"
-      (Ast.string_of_prog ast)
+    if (compare stage SParse) == 0 then
+      Printf.printf "\n%s\n"
+        (Ast.string_of_prog ast)
+    else
+      Printf.printf "Not yet implemented"
     (*
     let asm = Asm.from_ast ast in
     Printf.printf "%s\n%s\n"
@@ -26,5 +31,3 @@ let main () =
       ".section .note.GNU-stack,\"\",@progbits"
       (Asm.string_of_asm asm)
      *)
-
-let () = main ()
