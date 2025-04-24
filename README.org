@@ -34,6 +34,59 @@ $ cat examples/one.eg | dune exec ./egcc.exe
 Prog(Func(TyInt, main, Return(32)))
 #+end_src
 
+
+#+begin_src
+$ cat examples/one.eg | dune exec -- ./egcc.exe --help
+
+EGCC(1)                           Egcc Manual                          EGCC(1)
+
+
+
+NAME
+       egcc - An example compiler for C-like programs
+
+SYNOPSIS
+       egcc [-i] [-p] [OPTION]…
+
+OPTIONS
+       -i  IR generation
+
+       -p  Parsing
+
+COMMON OPTIONS
+       --help[=FMT] (default=auto)
+           Show this help in format FMT. The value FMT must be one of auto,
+           pager, groff or plain. With auto, the format is pager or plain
+           whenever the TERM env var is dumb or undefined.
+
+       --version
+           Show version information.
+
+EXIT STATUS
+       egcc exits with:
+
+       0   on success.
+
+       123 on indiscriminate errors reported on standard error.
+
+       124 on command line parsing errors.
+
+       125 on unexpected internal errors (bugs).
+
+BUGS
+       Report bugs to <ju-sh@example.org>.
+
+SEE ALSO
+#+end_src
+
+
+$ cat examples/minus.eg | dune exec ./egcc.exe
+Prog(Func(TyInt, main, Return(Negate (Negate (2)))
+
+$ cat examples/decr.eg | dune exec ./egcc.exe
+Parse error: Line 2
+
+
 * Resources
 https://gitlab.inria.fr/fpottier/menhir/blob/master/demos/calc-inspection/parser.mly
 

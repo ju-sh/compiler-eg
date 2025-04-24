@@ -1,5 +1,4 @@
 open Cmdliner
-(* open Cmdliner.Term.Syntax *)
 open Stage
 
 let prompt =
@@ -28,8 +27,6 @@ let main_cmd =
   (* Cmd.v (Cmd.info "egcc" ~version:"%%VERSION%%" ~doc ~man) @@ *)
   (* let+ staging in *)
   (* cmd_interface ~stage *)
-
-(* exit (Cmd.eval main_cmd) *)  
 
 let main () = Cmd.eval main_cmd
 let ()

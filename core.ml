@@ -20,7 +20,7 @@ let main stage =
   in 
     let _ = ast in
     if (compare stage SParse) == 0 then
-      Printf.printf "\n%s\n"
+      Printf.printf "%s\n"
         (Ast.string_of_prog ast)
     else
       Printf.printf "Not yet implemented"
