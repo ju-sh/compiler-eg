@@ -1,5 +1,4 @@
 type t
-  (* | SLex *)
   = SParse
   | SIr
   | SAsm
@@ -7,7 +6,6 @@ type t
   | SOpt
 
 let sem = function
-  (* | SLex -> 0 *)
   | SParse -> 1
   | SIr -> 2
   | SAsm -> 3
