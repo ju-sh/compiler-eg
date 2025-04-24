@@ -1,15 +1,15 @@
 type t
-  = SParse
-  | SIr
-  | SAsm
-  | SComp
-  | SOpt
+  = SParse   (* Lexing and parsing *)
+  | SIr      (* IR generation *)
+  | SAsm     (* ASM generation *)
+  | SComp    (* Compile *)
+  | SOpt     (* Compile with optimization *)
 
 let sem = function
-  | SParse -> 1
-  | SIr -> 2
-  | SAsm -> 3
-  | SComp -> 4
-  | SOpt -> 5
+  | SParse -> 0
+  | SIr -> 1
+  | SAsm -> 2
+  | SComp -> 3
+  | SOpt -> 4
 
 let compare x y = compare (sem x) (sem y)

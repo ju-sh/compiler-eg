@@ -86,6 +86,10 @@ Prog(Func(TyInt, main, Return(Negate (Negate (2)))
 $ cat examples/decr.eg | dune exec ./egcc.exe
 Parse error: Line 2
 
+$ cat examples/complement.eg | dune exec ./egcc.exe
+Prog(Func(TyInt, main, Return(Complement (2)))
+
+
 
 * Resources
 https://gitlab.inria.fr/fpottier/menhir/blob/master/demos/calc-inspection/parser.mly
